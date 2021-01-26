@@ -1,3 +1,4 @@
+require_relative 'company.rb'
 class AddEmpresaCommand
   def self.call bot, message
     if (message.chat && message.chat.username != 'carloswherbet') || message.chat.type == "group"

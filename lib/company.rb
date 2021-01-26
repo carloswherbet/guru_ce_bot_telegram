@@ -25,8 +25,7 @@ class Company < DbConfig
   end
 
   def create
-    db = SQLite3::Database.new "guru_ce.db"
-    db.execute("INSERT INTO companies ( name, url, gov, username)
+    DbConfig.db.execute("INSERT INTO companies ( name, url, gov, username)
     VALUES ( ?, ?, ?, ?)", [@name, @url, @gov.to_s, @username ])
     self
   end
