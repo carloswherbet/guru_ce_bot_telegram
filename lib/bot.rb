@@ -4,7 +4,7 @@ require_relative 'db.rb'
 require 'pry'
 class Bot
   def initialize
-    token = '***REMOVED***'
+    token = '[TOKEN]'
     Telegram::Bot::Client.run(token) do |bot|
       bot.api.deleteWebhook
       bot.listen do |message|
