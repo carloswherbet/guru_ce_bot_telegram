@@ -1,2 +1,9 @@
 # guru_ce_bot_telegram
-Bot do Grupo de Usuários Ruby do Ceará
+Bot do Grupo de Usuários Ruby do Ceará - GURU-CE
+
+## Setting TOKEN
+Adding an .env
+```
+TOKEN = [TOKEN_BOT]
+```
+

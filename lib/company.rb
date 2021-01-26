@@ -1,41 +1,33 @@
 require 'telegram/bot'
+require_relative 'db_config.rb'
 require 'net/http'
 require 'json'
-require_relative 'bot.rb'
+require 'pry'
 
-require "sqlite3"
-
-class Company
-  @id = nil
-  @name = nil
-  @url = nil
-  @gov = false
+class Company < DbConfig
+  attr_accessor :id, :name, :url, :gov, :username
 
   def initialize args
     @id = args[:id]
     @name = args[:name]
     @url = args[:url]
     @gov = 'false'
-    
-  end
-
-  def self.db
-    SQLite3::Database.new "guru_ce.db"
+    @username = args[:username]
   end
 
   def self.all
     @values = []
     db.execute( "select * from companies" ) do |row|
-      @values << self.new({id: row[0], name: row[1], url: row[2], gov: row[3] })
+      @values << self.new({id: row[0], name: row[1], url: row[2], gov: row[3], username: row[4] })
     end
     @values
 
   end
 
-  def create username
+  def create
     db = SQLite3::Database.new "guru_ce.db"
-    db.execute("INSERT INTO companies ( name, url, gov, username) 
-    VALUES ( ?, ?, ?, ?)", [@name, @url, @gov.to_s, username ])
+    db.execute("INSERT INTO companies ( name, url, gov, username)
+    VALUES ( ?, ?, ?, ?)", [@name, @url, @gov.to_s, @username ])
     self
   end
 
