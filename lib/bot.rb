@@ -26,7 +26,7 @@ class Bot
             bot.api.send_message(chat_id: message.from.id, text: "Utilize os comandos: #{ajuda}#{get_empresas}#{add_empresa} ")
           when /^\/add_empresa/
             if (message.chat && message.chat.username != 'carloswherbet') || message.chat.type == "group"
-              bot.api.send_message(chat_id: message.chat.id, text: "Desculpe, por enquanto somente usuários adminsitradores podem adicionar empresas.\n\nSolciite a adição da empresa no chat privado de @carloswherbet.", date: message.date)
+              bot.api.send_message(chat_id: message.chat.id, text: "Desculpe, por enquanto somente usuários Administradores podem adicionar empresas.\n\nSolciite a adição da empresa no chat privado de @carloswherbet.", date: message.date)
             else
               if message.text.strip == '/add_empresa'
                 msg = "Para adicionar uma empresa use o comando: \n /add_empresa  Nome da Empresa, Url da empresa(Não Obrigatório)"
