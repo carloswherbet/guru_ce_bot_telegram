@@ -1,7 +1,7 @@
 require "sqlite3"
 
 # Open a database
-db = SQLite3::Database.new "database/guru_ce.db"
+db = SQLite3::Database.new "./database/guru_ce.db"
 
 # Create a table
 rows = db.execute <<-SQL

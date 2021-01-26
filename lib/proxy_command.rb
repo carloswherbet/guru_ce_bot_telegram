@@ -1,4 +1,5 @@
 require_relative 'message.rb'
+require_relative 'company.rb'
 require_relative 'add_empresa_command.rb'
 class ProxyCommand
 
@@ -55,9 +56,9 @@ class ProxyCommand
 
   def self.print_commands
     ajuda = "\n\n/ajuda - Retorna exatamente aqui!\n\n"
-    get_empresas = "/get_empresas - Mostra a lista de empresas de tecnologia que trabalham com Ruby no Ceará\n\n"
-    add_empresa = "/add_empresa - Adiciona uma nova empresa à lista de empresas de tecnologia que trabalham com Ruby no Ceará\n\n"
-    @bot.api.send_message(chat_id: @message.chat.id, text: "Utilize os comandos: #{ajuda}#{get_empresas}#{add_empresa} ")
+    empresas = "/get_empresas - Mostra a lista de empresas de tecnologia que trabalham com Ruby no Ceará\n\n"
+    add_emp = "/add_empresa - Adiciona uma nova empresa à lista de empresas de tecnologia que trabalham com Ruby no Ceará\n\n"
+    @bot.api.send_message(chat_id: @message.chat.id, text: "Utilize os comandos: #{ajuda}#{empresas}#{add_emp} ")
   end
 
 end
