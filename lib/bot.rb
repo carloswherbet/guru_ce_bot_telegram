@@ -8,14 +8,18 @@ require 'pry'
 class Bot
   def initialize
     token = ENV['TOKEN']
-    Telegram::Bot::Client.run(token) do |bot|
-      bot.api.deleteWebhook
-      bot.listen do |message|
-        puts 'Ping'
-        ProxyCommand.call(bot, message)
+    begin
+      Telegram::Bot::Client.run(token) do |bot|
+        bot.api.deleteWebhook
+        bot.listen do |message|
+          puts 'Ping'
+          ProxyCommand.call(bot, message)
+        end
       end
-
+    rescue => exception
+      p exception.message
     end
+
   end
 
 end

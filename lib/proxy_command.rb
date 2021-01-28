@@ -13,13 +13,13 @@ class ProxyCommand
     # NOTE: need to improve
     @list_commands = methods(false)
     begin
-      if @list_commands.include?(command.to_sym)
+      if command && @list_commands.include?(command.to_sym)
         send(command) 
       else
         @bot.api.send_message(chat_id: @message.from.id, text: "Opção inválida, #{@message.from.first_name}, use /ajuda")
       end
     rescue => exception
-      # Dummy
+      p exception.message
       # @bot.api.send_message(chat_id: @message.from.id, text: "Opção inválida, #{@message.from.first_name}, use /ajuda")
     end
 
