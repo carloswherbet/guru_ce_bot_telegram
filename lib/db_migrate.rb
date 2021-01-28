@@ -10,7 +10,7 @@ rows = db.execute <<-SQL
     name varchar(30),
     url varchar(255),
     gov boolean,
-    createad_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     username varchar(255)
   );
 SQL
