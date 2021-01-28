@@ -7,3 +7,8 @@ Adding an .env file
 TOKEN = [TOKEN_BOT]
 ```
 
+## Starting BOT
+
+```
+ruby bin/main.rb
+```
