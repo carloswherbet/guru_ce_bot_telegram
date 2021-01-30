@@ -5,7 +5,9 @@ require 'json'
 require 'pry'
 
 class Company < DbConfig
-  attr_accessor :id, :name, :url, :gov, :username
+  ATTRIBUTES = [:id, :name, :url, :gov, :username]
+  attr_accessor *ATTRIBUTES
+
 
   def initialize args
     @id = args[:id]
@@ -18,7 +20,7 @@ class Company < DbConfig
   def self.all
     @values = []
     db.execute( "select * from companies" ) do |row|
-      @values << self.new({id: row[0], name: row[1], url: row[2], gov: row[3], username: row[4] })
+      @values << self.new({id: row[0], name: row[1], url: row[2], gov: row[3], username: row[5] })
     end
     @values
 
@@ -31,8 +33,15 @@ class Company < DbConfig
   end
 
   def to_s
-    url_description = @url ? "\n  \xF0\x9F\x94\x97 #{@url}" : ""
-    "\xF0\x9F\x94\xB7 #{@id} #{@name} #{url_description}"
+    if @url
+      "[\xF0\x9F\x94\xB7 #{@id} - #{@name} \xF0\x9F\x94\x97](#{@url})"
+    else
+      "\xF0\x9F\x94\xB7 #{@id} - #{@name}"
+    end
+  end
+
+  def attributes
+    ATTRIBUTES.map{|attribute| self.send(attribute) }
   end
 
 end
