@@ -2,7 +2,7 @@ require_relative '../company.rb'
 class AddEmpresaCommand
   def self.call bot, message
     message_menu_callback = (message.message rescue nil) || message
-    if (message_menu_callback.chat && message_menu_callback.chat.username != 'carloswherbet') || message_menu_callback.chat.type == "group"
+    if (message_menu_callback.chat && message_menu_callback.chat.username != 'carloswherbet') || ['group', 'supergroup'].include?(message_menu_callback.chat.type)
       bot.api.send_message(chat_id: message_menu_callback.chat.id, text: "Desculpe, por enquanto somente usuários Administradores podem adicionar empresas.\n\nSolciite a adição da empresa no chat privado de @carloswherbet.", date: message.date)
     else
       case message
