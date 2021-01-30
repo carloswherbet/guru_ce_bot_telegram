@@ -40,6 +40,7 @@ class Bot
 
       # bot.api.send_message(chat_id: message.chat.id, text: "@#{message.from.username}, mandei no privado um bocado de coisas que sei fazer.")
       Message.welcome(bot, message) 
+      Message.send(bot,message){['Digite ou Clique em /menu para acessar o menu principal']}
     elsif (message.left_chat_member rescue nil) 
       # Dummy
     elsif ((message.new_chat_members.size >0 ) rescue nil)
