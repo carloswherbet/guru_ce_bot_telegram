@@ -38,7 +38,7 @@ class Bot
     if (message.methods.include?(:chat) && [ 'group', 'supergroup'].include?(message.chat.type)  &&
       (!message.left_chat_member && message.new_chat_members.size == 0))
 
-      bot.api.send_message(chat_id: message.chat.id, text: "@#{message.from.username}, mandei no privado um bocado de coisas que sei fazer.")
+      # bot.api.send_message(chat_id: message.chat.id, text: "@#{message.from.username}, mandei no privado um bocado de coisas que sei fazer.")
       Message.welcome(bot, message) 
     elsif (message.left_chat_member rescue nil) 
       # Dummy
