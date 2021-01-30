@@ -35,12 +35,11 @@ class Bot
   end
 
   def plz_not_flood_the_group bot, message
-    if (message.methods.include?(:chat) && message.chat.type == 'group' &&
+    if (message.methods.include?(:chat) && [ 'group', 'supergroup'].include?(message.chat.type)  &&
       (!message.left_chat_member && message.new_chat_members.size == 0))
 
       bot.api.send_message(chat_id: message.chat.id, text: "@#{message.from.username}, mandei no privado um bocado de coisas que sei fazer.")
       Message.welcome(bot, message) 
-      # Menu.call(bot, message, 'menu_inicial')
     elsif (message.left_chat_member rescue nil) 
       # Dummy
     elsif ((message.new_chat_members.size >0 ) rescue nil)
