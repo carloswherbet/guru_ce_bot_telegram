@@ -29,7 +29,7 @@ class Menu
     if (@message.message.message_id rescue nil)
       @bot.api.editMessageReplyMarkup(chat_id: @chat_id, message_id: (@message.message.message_id), reply_markup: markup)
     else
-      @bot.api.send_message(chat_id: @chat_id, text: " \xF0\x9F\x93\x81	*GURU-CE BOT*\n⚠️ As opções de menu com (🔸) estão ainda em desenvolvimento.\n", reply_markup: markup, parse_mode: 'Markdown' )
+      @bot.api.send_message(chat_id: @chat_id, text: " \xF0\x9F\x93\x81	*GURU-CE BOT*\n⚠️ As opções do menu com (🔸) estão ainda em desenvolvimento.\n", reply_markup: markup, parse_mode: 'Markdown' )
     end
   end
 

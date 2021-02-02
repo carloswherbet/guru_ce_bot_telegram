@@ -12,7 +12,7 @@ class Bot
       Telegram::Bot::Client.run(token) do |bot|
         bot.api.deleteWebhook
         bot.listen do |message|
-          p 'Ping'
+          p message.from.first_name
           @message = message
           plz_not_flood_the_group(bot, message) do
             case message

@@ -26,7 +26,7 @@ class ProxyCommand
       end
     rescue => exception
       p exception.message
-      @bot.api.send_message(chat_id: @chat_id, text: "Hey mah, use o menu abaixo que fica mais facil navegar.")
+      (@bot.api.send_message(chat_id: @chat_id, text: "Hey mah, use o menu abaixo que fica mais facil navegar.")) rescue nil
     end
   end
 
