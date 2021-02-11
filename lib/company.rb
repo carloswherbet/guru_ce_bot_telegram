@@ -23,12 +23,26 @@ class Company < DbConfig
       @values << self.new({id: row[0], name: row[1], url: row[2], gov: row[3], username: row[5] })
     end
     @values
+  end
 
+  def self.find id
+    row = DbConfig.db.execute("select * from  companies where id = ?", [id]).first
+    self.new({id: row[0], name: row[1], url: row[2], gov: row[3], username: row[5] })
+  end
+
+  def update
+    DbConfig.db.execute("UPDATE companies set name = ?, url = ?, gov = ?, username = ?
+     WHERE id = ?", [@name, @url, @gov.to_s, @username, @id])
+     self
+  end
+
+  def destroy
+    DbConfig.db.execute("DELETE FROM companies where id = ?", [@id])
   end
 
   def create
     DbConfig.db.execute("INSERT INTO companies ( name, url, gov, username)
-    VALUES ( ?, ?, ?, ?)", [@name, @url, @gov.to_s, @username ])
+    VALUES ( ?, ?, ?, ?)", [@name, @url, @gov, @username])
     self
   end
 

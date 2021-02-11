@@ -1,4 +1,4 @@
-
+require_relative 'company.rb'
 class Menu
 
   def self.call bot, message, menu_name
@@ -22,7 +22,7 @@ class Menu
         Telegram::Bot::Types::InlineKeyboardButton.new(text: "Sobre o BOT", callback_data: '/sobre')
       ]
     ]
-    if @message.from.username == 'carloswherbet'
+    if $admin_users.include?(@message.from.username)
       kb << Telegram::Bot::Types::InlineKeyboardButton.new(text: "Administração", callback_data: 'menu_admin')
     end
     markup = Telegram::Bot::Types::InlineKeyboardMarkup.new(inline_keyboard: kb)
@@ -37,10 +37,29 @@ class Menu
     kb = [
       Telegram::Bot::Types::InlineKeyboardButton.new(text: "Ver lista de Empresas Ruby", callback_data: '/list_empresas'),
     ]
-    if @message.from.username == 'carloswherbet'
+    if $admin_users.include?(@message.from.username)
       kb << Telegram::Bot::Types::InlineKeyboardButton.new(text: "Adicionar uma Empresa Ruby", callback_data: '/add_empresa')
+      kb << Telegram::Bot::Types::InlineKeyboardButton.new(text: "Gerenciar Empresa Ruby", callback_data: 'menu_manage_empresas')
     end
     kb << Telegram::Bot::Types::InlineKeyboardButton.new(text: "« Voltar", callback_data: 'menu_inicial')
+    markup = Telegram::Bot::Types::InlineKeyboardMarkup.new(inline_keyboard: kb )
+    @bot.api.editMessageReplyMarkup(chat_id: @chat_id, message_id: (@message.message.message_id), reply_markup: markup)
+  end
+
+  def self.menu_manage_empresas
+    kb = []
+    if $admin_users.include?(@message.from.username)
+      Company.all.each do |company|
+        kb << Telegram::Bot::Types::InlineKeyboardButton.new(text: "#{company.name}", callback_data: 'menu_manage_empresas')
+        kb << [
+          Telegram::Bot::Types::InlineKeyboardButton.new(text: "Editar", callback_data: "/edit_empresa #{company.id}"),
+          Telegram::Bot::Types::InlineKeyboardButton.new(text: "Apagar", callback_data: "/destroy_empresa #{company.id}"),
+        ]
+        kb << Telegram::Bot::Types::InlineKeyboardButton.new(text: "-----", callback_data: 'menu_manage_empresas')
+
+      end
+    end
+    kb << Telegram::Bot::Types::InlineKeyboardButton.new(text: "« Voltar", callback_data: 'menu_empresas')
     markup = Telegram::Bot::Types::InlineKeyboardMarkup.new(inline_keyboard: kb )
     @bot.api.editMessageReplyMarkup(chat_id: @chat_id, message_id: (@message.message.message_id), reply_markup: markup)
   end
@@ -60,7 +79,7 @@ class Menu
 
   def self.menu_eventos
 
-    if @message.from.username == 'carloswherbet'
+    if $admin_users.include?(@message.from.username)
       kb = [
         Telegram::Bot::Types::InlineKeyboardButton.new(text: '🔸 Ver lista de Eventos Ruby', callback_data: '/list_eventos'),
         Telegram::Bot::Types::InlineKeyboardButton.new(text: '🔸 Adicionar Evento Ruby', callback_data: '/add_evento'),
