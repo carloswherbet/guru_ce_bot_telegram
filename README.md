@@ -10,6 +10,8 @@ Ask @carloswherbet on telegram
 Adding an .env file
 ```
 TOKEN = [TOKEN_BOT]
+ADMIN_USERS = carloswherbet
+GROUP_CHAT_ID = #####
 ```
 
 ## Starting BOT
