@@ -45,7 +45,7 @@ class Bot
       # Dummy
     elsif ((message.new_chat_members.size >0 ) rescue nil)
       members =  message.new_chat_members.map{|m| m.first_name}
-      boas_vindas = [
+      welcome = [
         "A partir de hoje temos mais um desenvolvedor seguindo nos mesmos trilhos, #{members[0]} seja bem vindo! 🤖",
         "O mundo Ruby espera você, #{members[0]} seja bem vindo! 🤖",
         "Ganhamos um reforço na nossa equipe, #{members[0]} seja bem vindo! 🤖",
@@ -53,7 +53,7 @@ class Bot
         "Olá #{members[0]}, seja bem-vindo! 🤖"]
 
       welcome_new_members = members.size == 1 ? "seja bem-vindo! 🤖" : "sejam bem-vindos ao Grupo de Usuários Ruby do Ceará! 🤖" 
-      bot.api.send_message(chat_id: message.chat.id, text: "#{boas_vindas.sample}")
+      bot.api.send_message(chat_id: message.chat.id, text: "#{welcome.sample}")
       # bot.api.send_message(chat_id: message.chat.id, text: "Olá #{members.join(',')}, #{welcome_new_members}")
     else
       yield
