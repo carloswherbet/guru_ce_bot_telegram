@@ -50,7 +50,7 @@ class Bot
         "O mundo Ruby espera você, #{members[0]} seja bem vindo! 🤖",
         "Ganhamos um reforço na nossa equipe, #{members[0]} seja bem vindo! 🤖",
         "A espera acabou, , #{members[0]} seja bem vindo! 🤖",
-        "#{members[0]}, seja bem-vindo! 🤖"]
+        "Olá #{members[0]}, seja bem-vindo! 🤖"]
 
       welcome_new_members = members.size == 1 ? "seja bem-vindo! 🤖" : "sejam bem-vindos ao Grupo de Usuários Ruby do Ceará! 🤖" 
       bot.api.send_message(chat_id: message.chat.id, text: "#{boas_vindas.sample}")
