@@ -37,7 +37,7 @@ class ProxyCommand
     Message.send(@bot, @message) do
       [
         "*Sobre o GURU-CE Bot*\n",
-        "Oi, ainda não tenho nome mas fui desenvolvido para trazer informações \
+        "Oi, ainda não tenho nome mas me desenvolveram para trazer informações \
 sobre o mundo Ruby para você, sei fazer coisas como:\n",
         "🔹 Mostrar a lista de empresas que trabalham com Ruby no Ceará",
         "🔸 Mostrar os eventos Ruby no Brasil(Breve)",
@@ -136,7 +136,7 @@ para me ajudar a crescer e dominar o mundo! \b Tô de Brinks! 🤖👻 \n\n",
       [
         "🔸 *Ainda não disponível*\n",
         "Quer implementar essa Funcionalidade?",
-        'Fale com @carloswherbet ou um dos administradores do GURU-CE e ajude o projeto no [github](https://github.com/carloswherbet/guru_ce_bot_telegram)',
+        'Fale com @carloswherbet ou um alguem da administração do GURU-CE e ajude o projeto no [github](https://github.com/carloswherbet/guru_ce_bot_telegram)',
       ]
     end
   end
