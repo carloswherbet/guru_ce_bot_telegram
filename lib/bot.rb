@@ -39,20 +39,20 @@ class Bot
     if (message.methods.include?(:chat) && [ 'group', 'supergroup'].include?(message.chat.type)  &&
       (!message.left_chat_member && message.new_chat_members.size == 0))
 
-      Message.welcome(bot, message) 
+      Message.welcome(bot, message)
       Message.send(bot,message){['Digite ou Clique em /menu para acessar o menu principal']}
-    elsif (message.left_chat_member rescue nil) 
+    elsif (message.left_chat_member rescue nil)
       # Dummy
     elsif ((message.new_chat_members.size >0 ) rescue nil)
       members =  message.new_chat_members.map{|m| m.first_name}
       welcome = [
-        "A partir de hoje temos mais um desenvolvedor seguindo nos mesmos trilhos, #{members[0]} seja bem vindo! 🤖",
-        "O mundo Ruby espera você, #{members[0]} seja bem vindo! 🤖",
-        "Ganhamos um reforço na nossa equipe, #{members[0]} seja bem vindo! 🤖",
-        "A espera acabou, , #{members[0]} seja bem vindo! 🤖",
-        "Olá #{members[0]}, seja bem-vindo! 🤖"]
+        "A partir de hoje temos mais uma pessoa desenvolvedora seguindo nos mesmos trilhos, boas-vindas, #{members[0]}! 🤖",
+        "O mundo Ruby espera você, boas-vindas #{members[0]}! 🤖",
+        "Ganhamos um reforço na nossa equipe, boas-vindas #{members[0]}! 🤖",
+        "A espera acabou, , boas-vindas #{members[0]}! 🤖",
+        "Olá #{members[0]}, boas-vindas! 🤖"]
 
-      welcome_new_members = members.size == 1 ? "seja bem-vindo! 🤖" : "sejam bem-vindos ao Grupo de Usuários Ruby do Ceará! 🤖" 
+      welcome_new_members = members.size == 1 ? "Boas-Vindas! 🤖" : "Boas-vindas ao Grupo de Usuários Ruby do Ceará! 🤖"
       bot.api.send_message(chat_id: message.chat.id, text: "#{welcome.sample}")
       # bot.api.send_message(chat_id: message.chat.id, text: "Olá #{members.join(',')}, #{welcome_new_members}")
     else
