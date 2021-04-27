@@ -4,7 +4,7 @@ require "sqlite3"
 db = SQLite3::Database.new "./database/guru_ce.db"
 
 # Create a table
-rows = db.execute <<-SQL
+db.execute <<-SQL
   create table IF NOT EXISTS companies (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name varchar(30),
@@ -14,4 +14,3 @@ rows = db.execute <<-SQL
     username varchar(255)
   );
 SQL
-
