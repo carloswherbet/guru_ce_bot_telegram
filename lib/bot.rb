@@ -41,9 +41,9 @@ class Bot
   def plz_not_flood_the_group bot, message
     if (message.methods.include?(:chat) && [ 'group', 'supergroup'].include?(message.chat.type)  &&
       (!(message.left_chat_member rescue nil) && (message.new_chat_members.size == 0) rescue true))
-
-      Message.welcome(bot, message)
-      Message.send(bot,message){['Digite ou Clique em /menu para acessar o menu principal']}
+      # Dummy
+      # Message.welcome(bot, message)
+      # Message.send(bot,message){['Digite ou Clique em /menu para acessar o menu principal']}
     elsif (message.left_chat_member rescue nil) 
       # Dummy
     elsif ((message.new_chat_members.size >0 ) rescue nil)
