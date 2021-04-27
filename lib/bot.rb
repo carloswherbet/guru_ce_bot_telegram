@@ -3,8 +3,10 @@ require_relative 'db_migrate.rb'
 require_relative 'message.rb'
 require_relative 'company.rb'
 require_relative 'proxy_command.rb'
+require_relative 'security_alert.rb'
 require 'dotenv/load'
 require 'pry'
+
 class Bot
   def initialize
     token = ENV['TOKEN']
@@ -12,6 +14,7 @@ class Bot
     begin
       Telegram::Bot::Client.run(token) do |bot|
         bot.api.deleteWebhook
+        SecurityAlert::start! bot
         bot.listen do |message|
           p message.from.first_name
           p "#{message.chat.id}-#{message.chat.title}" rescue ''
@@ -37,11 +40,11 @@ class Bot
 
   def plz_not_flood_the_group bot, message
     if (message.methods.include?(:chat) && [ 'group', 'supergroup'].include?(message.chat.type)  &&
-      (!message.left_chat_member && message.new_chat_members.size == 0))
+      (!message.try(:left_chat_member) && message.new_chat_members.size == 0))
 
       Message.welcome(bot, message)
       Message.send(bot,message){['Digite ou Clique em /menu para acessar o menu principal']}
-    elsif (message.left_chat_member rescue nil)
+    elsif (message.try(:left_chat_member) rescue nil) 
       # Dummy
     elsif ((message.new_chat_members.size >0 ) rescue nil)
       members =  message.new_chat_members.map{|m| m.first_name}
