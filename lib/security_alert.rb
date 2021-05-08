@@ -32,7 +32,7 @@ module SecurityAlert
     queue = Queue.new
     producer = Thread.new do
       loop do
-        sleep 60
+        sleep 3600
         alerts = receive()
         messages = [" 🤖 *Ruby on Rails: Security* \n\n"]
         alerts.each do |alert|
